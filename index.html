@@ -17,7 +17,7 @@
    CLAUDE SUMMIT 26 · Data Group
    Paleta Data Group: "Brand Guideline | Data Group" (2026), p.19-22
    Paleta Anthropic:  skill oficial anthropics/skills · brand-guidelines
-   Tipografia: Nixie One (display) + Inter (corpo) — p.24-25 do manual
+   Tipografia: Nixie One (display) + Inter (corpo) – p.24-25 do manual
    ========================================================================== */
 :root{
 
@@ -35,7 +35,7 @@
   --pad:clamp(20px,5vw,96px);
   --sec:clamp(64px,7vw,100px);
 
-  /* superfície corrente — cada seção redefine, os componentes acompanham */
+  /* superfície corrente – cada seção redefine, os componentes acompanham */
   --ink:#fff;
   --ink-muted:rgba(255,255,255,.62);
   --line:rgba(255,255,255,.16);
@@ -130,13 +130,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media(max-width:760px){.hero-spark{width:290px;right:-120px;bottom:-24px;opacity:.32}}
 
 /* ---------- faixa dos cinco Ws ---------- */
-.faixa{background:var(--clay);color:var(--an-dark)}
-.faixa-in{display:flex;align-items:center;justify-content:space-between;gap:clamp(14px,2vw,28px);
-  padding-block:26px;flex-wrap:wrap}
-.faixa .div{width:4px;height:4px;border-radius:50%;background:rgba(20,20,19,.4);flex-shrink:0}
-.faixa .lbl{font-size:clamp(12px,1.15vw,14px)}
-@media(max-width:820px){.faixa .div{display:none}
-  .faixa-in{gap:12px 24px;justify-content:flex-start}}
+.faixa{background:var(--clay);color:var(--an-dark);overflow:hidden}
+.faixa .lbl{font-size:clamp(13px,1.2vw,15px);white-space:nowrap}
+.faixa-track{display:flex;width:max-content;animation:faixa-scroll 38s linear infinite}
+.faixa-row{display:flex;align-items:center;gap:28px;padding-block:24px;padding-inline:14px;flex-shrink:0}
+.faixa .dot{width:5px;height:5px;border-radius:50%;background:rgba(20,20,19,.4);flex-shrink:0}
+.faixa:hover .faixa-track{animation-play-state:paused}
+@keyframes faixa-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.faixa-track{animation:none}}
 
 /* ---------- sobre ---------- */
 .about{margin-top:clamp(36px,4.5vw,56px);display:grid;gap:clamp(36px,5vw,80px)}
@@ -267,7 +268,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="nav-lock" href="#topo" aria-label="Data Group — início">
+    <a class="nav-lock" href="#topo" aria-label="Data Group – início">
       <img class="dg" src="assets/datagroup-logo-white.png" alt="Data Group" />
       <span class="sep" aria-hidden="true"></span>
       <img class="an" src="assets/anthropic-logo-white.png" alt="Anthropic" />
@@ -311,16 +312,40 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       </div>
     </div>
   </section>
-  <!-- ============ FAIXA — os cinco Ws ============ -->
   <section class="faixa">
-    <div class="wrap faixa-in">
-      <div class="lbl">30 de setembro</div>
-      <span class="div" aria-hidden="true"></span>
-      <div class="lbl">Cubo Itaú · Vila Olímpia · SP</div>
-      <span class="div" aria-hidden="true"></span>
-      <div class="lbl">08h30 — 17h30</div>
-      <span class="div" aria-hidden="true"></span>
-      <div class="lbl">R$ 600 · vagas limitadas</div>
+    <div class="faixa-track" aria-label="Informações do evento">
+      <div class="faixa-row">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">30 de setembro</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Cubo Itaú · Vila Olímpia · SP</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">08h30 – 17h30</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">R$ 600 · vagas limitadas</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Vagas limitadas</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Claude Partner Network</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Data Group · líder em licenciamento Claude no Brasil</span>
+      </div>
+      <div class="faixa-row" aria-hidden="true">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">30 de setembro</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Cubo Itaú · Vila Olímpia · SP</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">08h30 – 17h30</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">R$ 600 · vagas limitadas</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Vagas limitadas</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Claude Partner Network</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Data Group · líder em licenciamento Claude no Brasil</span>
+      </div>
     </div>
   </section>
 
@@ -351,7 +376,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
   </section>
 
-  <!-- ============ 02 NA PRÁTICA — painéis estilizados, não capturas da interface real ============ -->
+  <!-- ============ 02 NA PRÁTICA – painéis estilizados, não capturas da interface real ============ -->
   <section class="sec on-dark" id="pratica">
     <div class="wrap">
       <div class="sec-head"><span class="num">02</span><span class="lbl" style="color:var(--ink-muted)">Na prática</span></div>
@@ -371,9 +396,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
               <div class="msg-u">Quais contratos vencem esse mês e onde estão os riscos?</div>
               <div class="msg-a">Encontrei <b>14 contratos</b> vencendo em setembro. Três pedem atenção:
                 <ul>
-                  <li>· Fornecedor A — reajuste acima do índice combinado</li>
-                  <li>· Fornecedor B — renovação automática em 5 dias</li>
-                  <li>· Fornecedor C — sem cláusula de rescisão</li>
+                  <li>· Fornecedor A – reajuste acima do índice combinado</li>
+                  <li>· Fornecedor B – renovação automática em 5 dias</li>
+                  <li>· Fornecedor C – sem cláusula de rescisão</li>
                 </ul>
               </div>
             </div>
@@ -398,13 +423,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
               <div class="dim">Escrevendo <span class="teal">resumo-diario.md</span></div>
               <div class="ok">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>
-                Pronto — 3 arquivos, 1 agente agendado
+                Pronto – 3 arquivos, 1 agente agendado
               </div>
             </div>
             <div class="win-in">O que você quer construir?</div>
           </div>
           <div class="cap">Montar um agente que trabalha sozinho</div>
-          <p class="cap-p">Skills, MCP e agentes ligados aos seus sistemas — construídos em conversa, com facilitador na mesa.</p>
+          <p class="cap-p">Skills, MCP e agentes ligados aos seus sistemas – construídos em conversa, com facilitador na mesa.</p>
         </div>
       </div>
     </div>
@@ -414,42 +439,42 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <section class="sec on-ivory-2" id="agenda">
     <div class="wrap">
       <div class="sec-head"><span class="num">03</span><span class="lbl" style="color:var(--ink-muted)">Agenda</span>
-        <span class="of lbl">08h30 — 17h30 · Cubo Itaú</span></div>
+        <span class="of lbl">08h30 – 17h30 · Cubo Itaú</span></div>
       <h2 class="h2 rv" style="margin-top:clamp(28px,3.4vw,48px)">Do fundamento <em>à prática</em></h2>
 
       <ul class="slots">
         <li class="slot rv">
-          <span class="t lbl">08h30 — 09h30</span>
+          <span class="t lbl">08h30 – 09h30</span>
           <h3>Credenciamento e café da manhã</h3>
           <span class="tag lbl">Abertura</span>
         </li>
         <!-- PLACEHOLDER · título da palestra 01 -->
         <li class="slot rv">
-          <span class="t lbl">09h30 — 11h30</span>
+          <span class="t lbl">09h30 – 11h30</span>
           <div><h3>[TÍTULO DA PALESTRA 01]</h3>
             <p>Fundamentos do ecossistema Claude e a peça certa para cada tarefa.</p></div>
           <span class="tag talk lbl">Palestra</span>
         </li>
         <li class="slot rv">
-          <span class="t lbl">11h30 — 13h00</span>
+          <span class="t lbl">11h30 – 13h00</span>
           <h3 class="mut">Almoço livre</h3>
           <span class="tag lbl">Intervalo</span>
         </li>
         <!-- PLACEHOLDER · título da palestra 02 -->
         <li class="slot rv">
-          <span class="t lbl">13h00 — 15h00</span>
+          <span class="t lbl">13h00 – 15h00</span>
           <div><h3>[TÍTULO DA PALESTRA 02]</h3>
             <p>IA agêntica aplicada ao negócio: onde ela já gera resultado mensurável.</p></div>
           <span class="tag talk lbl">Palestra</span>
         </li>
         <li class="slot rv">
-          <span class="t lbl">15h00 — 15h30</span>
+          <span class="t lbl">15h00 – 15h30</span>
           <h3 class="mut">Coffee break</h3>
           <span class="tag lbl">Intervalo</span>
         </li>
         <!-- PLACEHOLDER · título da palestra 03 -->
         <li class="slot rv">
-          <span class="t lbl">15h30 — 17h30</span>
+          <span class="t lbl">15h30 – 17h30</span>
           <div><h3>[TÍTULO DA PALESTRA 03] e encerramento</h3>
             <p>Construção de agentes, Skills e MCP, e o que levar para a operação na segunda-feira.</p></div>
           <span class="tag talk lbl">Palestra</span>
@@ -520,7 +545,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="venue">
         <div class="rv">
           <h2 class="h2">Cubo Itaú, <em>Vila Olímpia</em></h2>
-          <p class="addr">Alameda Vicente Pinzon, 54 — Vila Olímpia, São Paulo — SP</p>
+          <p class="addr">Alameda Vicente Pinzon, 54 – Vila Olímpia, São Paulo – SP</p>
           <a class="btn btn-ink" style="margin-top:30px"
              href="https://www.google.com/maps/search/?api=1&query=Alameda+Vicente+Pinzon,+54,+Vila+Olimpia,+Sao+Paulo"
              target="_blank" rel="noopener noreferrer">Ver no Google Maps
@@ -544,7 +569,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="faq rv">
         <details>
           <summary>Preciso saber programar?<span class="plus" aria-hidden="true">+</span></summary>
-          <div class="ans">Não. Nenhum bloco do dia exige código. As partes mais técnicas — Skills, MCP e agentes — são construídas em interface conversacional, com facilitador na mesa.</div>
+          <div class="ans">Não. Nenhum bloco do dia exige código. As partes mais técnicas – Skills, MCP e agentes – são construídas em interface conversacional, com facilitador na mesa.</div>
         </details>
         <details>
           <summary>Preciso já usar o Claude?<span class="plus" aria-hidden="true">+</span></summary>
