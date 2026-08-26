@@ -117,15 +117,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 
 /* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;padding-top:calc(74px + clamp(48px,7vw,104px));padding-bottom:clamp(56px,7vw,96px)}
+.hero{position:relative;overflow:hidden;min-height:100svh;display:grid;align-content:end;padding-block:clamp(96px,12vw,140px) clamp(56px,7vw,96px)}
 .hero-spark{position:absolute;right:-150px;top:128px;width:520px;z-index:1;pointer-events:none}
 .hero-in{position:relative;z-index:2}
 .hero h1{font-family:var(--font-nx);font-size:clamp(52px,10.4vw,152px);line-height:.94;
   letter-spacing:-.01em;margin-top:clamp(18px,2.2vw,30px)}
 .hero h1 span{display:block;color:var(--clay)}
-.hero-foot{margin-top:clamp(16px,2.5vw,32px);
-  display:flex;gap:clamp(28px,5vw,64px);align-items:flex-end;flex-wrap:wrap}
-.hero-foot p{max-width:450px;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:var(--ink-muted)}
+.hero-foot{margin-top:clamp(20px,3vw,40px);display:grid;gap:24px}
+.hero-foot p{max-width:56ch;font-size:clamp(15px,1.3vw,18px);line-height:1.6;color:var(--ink-muted)}
 .hero-foot p b{color:#fff;font-weight:600}
 @media(max-width:1100px){.hero-spark{width:400px;right:-120px;top:auto;bottom:-40px;opacity:.85}}
 @media(max-width:760px){.hero-spark{width:290px;right:-120px;bottom:-24px;opacity:.32}}
@@ -304,9 +303,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <h1>Claude<span>Summit 26</span></h1>
       <div class="hero-foot">
         <p>Um dia para sair com o Claude trabalhando por você. <b>Não é um curso sobre inteligência artificial. É um dia de construção.</b></p>
-        <a class="btn btn-blue js-cta" href="#ingresso">Quero Participar
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <div class="hero-cta">
+          <a class="btn btn-blue js-cta" href="#ingresso">Quero Participar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
