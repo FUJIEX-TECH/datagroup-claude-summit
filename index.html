@@ -20,12 +20,6 @@
    Tipografia: Nixie One (display) + Inter (corpo) — p.24-25 do manual
    ========================================================================== */
 :root{
-  /* Data Group */
-  --jelly-blue:#024FFA;
-  --jelly-teal:#35E8C8;
-  --dark-blue:#1E1F5E;
-  --purple:#5C55A3;
-  --orange:#F4A724;
 
   /* Anthropic */
   --clay:#D97757;
@@ -73,23 +67,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .on-ivory{background:var(--ivory)}
 .on-ivory-2{background:var(--ivory-2)}
 
-/* cabeçalho de seção: numeral grande em azul, como as aberturas do manual */
+/* cabeçalho de seção: numeral grande em clay */
 .sec-head{display:flex;align-items:baseline;gap:clamp(12px,1.5vw,20px);
   border-top:1px solid var(--line);padding-top:26px}
-.sec-head .num{font-family:var(--font-nx);font-size:clamp(34px,3.7vw,52px);color:var(--jelly-blue);line-height:1}
+.sec-head .num{font-family:var(--font-nx);font-size:clamp(34px,3.7vw,52px);color:var(--clay);line-height:1}
 .sec-head .of{margin-left:auto;color:var(--ink-muted)}
 @media(max-width:700px){.sec-head .of{display:none}}
 .h2{font-family:var(--font-nx);font-size:clamp(34px,5vw,72px);line-height:1.03}
-.h2 em{font-style:normal;color:var(--jelly-blue)}
+.h2 em{font-style:normal;color:var(--clay)}
 
 .btn{display:inline-flex;align-items:center;gap:12px;padding:17px 32px;font-size:15px;
   font-weight:600;white-space:nowrap;transition:background .2s ease,color .2s ease,transform .18s ease}
 .btn svg{transition:transform .18s ease}
 .btn:hover svg{transform:translateX(3px)}
-.btn-blue{background:var(--jelly-blue);color:#fff}
-.btn-blue:hover{background:#0140d4}
+.btn-blue{background:var(--clay);color:#fff}
+.btn-blue:hover{background:#c4624a}
 .btn-ink{background:var(--an-dark);color:var(--ivory);border-radius:999px}
-.btn-ink:hover{background:var(--dark-blue)}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .35s ease,backdrop-filter .35s ease}
@@ -129,8 +122,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero-in{position:relative;z-index:2}
 .hero h1{font-family:var(--font-nx);font-size:clamp(52px,10.4vw,152px);line-height:.94;
   letter-spacing:-.01em;margin-top:clamp(18px,2.2vw,30px)}
-.hero h1 span{display:block;color:var(--jelly-blue)}
-.hero-foot{margin-top:clamp(36px,5vw,68px);border-top:1px solid var(--line);padding-top:32px;
+.hero h1 span{display:block;color:var(--clay)}
+.hero-foot{margin-top:clamp(36px,5vw,68px);padding-top:32px;
   display:flex;gap:clamp(28px,5vw,64px);align-items:flex-end;flex-wrap:wrap}
 .hero-foot p{max-width:450px;font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:var(--ink-muted)}
 .hero-foot p b{color:#fff;font-weight:600}
@@ -153,7 +146,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .about .lead b{color:var(--ink);font-weight:600}
 .badge{width:210px;height:auto}
 .svc{margin-top:24px}
-.svc li{border-top:1px solid var(--line);padding:24px 0}
+.svc li{padding:24px 0}
 .svc li:last-child{border-bottom:1px solid var(--line)}
 .svc h3{font-family:var(--font-nx);font-weight:400;font-size:clamp(24px,2.1vw,30px)}
 .svc p{margin-top:8px;font-size:15px;line-height:1.55;color:var(--ink-muted)}
@@ -174,7 +167,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .win-chat{background:var(--ivory);color:var(--an-dark)}
 .win-chat .win-top{border-bottom:1px solid rgba(20,20,19,.14)}
 .msgs{margin-block:20px;display:flex;flex-direction:column;gap:14px}
-.msg-u{align-self:flex-end;max-width:78%;background:var(--jelly-blue);color:#fff;padding:12px 15px;font-size:14px;line-height:1.5}
+.msg-u{align-self:flex-end;max-width:78%;background:var(--clay);color:#fff;padding:12px 15px;font-size:14px;line-height:1.5}
 .msg-a{align-self:flex-start;max-width:88%;background:#fff;border:1px solid rgba(20,20,19,.12);
   padding:14px 15px;font-size:14px;line-height:1.55}
 .msg-a b{color:var(--clay)}
@@ -185,8 +178,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .win-code .win-top{border-bottom:1px solid rgba(255,255,255,.14)}
 .code{margin-top:18px;font-size:13.5px;line-height:1.8;color:rgba(255,255,255,.82)}
 .code .dim{color:rgba(255,255,255,.5)}
-.code .teal{color:var(--jelly-teal)}
-.code .ok{margin-top:14px;display:flex;align-items:center;gap:8px;color:var(--jelly-teal)}
+.code .teal{color:var(--clay)}
+.code .ok{margin-top:14px;display:flex;align-items:center;gap:8px;color:var(--clay)}
 .win-code .win-in{margin-top:auto;border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.35);display:block}
 
 /* ---------- agenda ---------- */
@@ -194,7 +187,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .slot{display:grid;grid-template-columns:1fr;gap:6px;padding:26px 0;border-top:1px solid var(--line)}
 .slot:last-child{border-bottom:1px solid var(--line)}
 @media(min-width:820px){.slot{grid-template-columns:170px 1fr 110px;gap:32px;align-items:baseline}}
-.slot .t{color:var(--jelly-blue)}
+.slot .t{color:var(--clay)}
 .slot h3{font-family:var(--font-nx);font-weight:400;font-size:clamp(22px,2.1vw,30px)}
 .slot h3.mut{color:var(--ink-muted)}
 .slot p{margin-top:7px;font-size:15px;line-height:1.5;color:var(--ink-muted)}
@@ -236,8 +229,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
   gap:32px;padding:26px 0;font-family:var(--font-nx);font-size:clamp(21px,1.9vw,28px);transition:color .2s ease}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary:hover{color:var(--jelly-blue)}
-.faq .plus{font-family:var(--font-nx);font-size:clamp(26px,2.2vw,32px);color:var(--jelly-blue);
+.faq summary:hover{color:var(--clay)}
+.faq .plus{font-family:var(--font-nx);font-size:clamp(26px,2.2vw,32px);color:var(--clay);
   line-height:1;transition:transform .3s ease}
 .faq details[open] .plus{transform:rotate(45deg)}
 .faq .ans{padding:0 clamp(0px,4vw,56px) 26px 0;max-width:70ch;font-size:16px;line-height:1.65;color:var(--ink-muted)}
@@ -255,10 +248,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media(min-width:820px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr}}
 .foot .dg{height:21px;width:auto}
 .foot .blurb{margin-top:22px;max-width:34ch;font-size:15px;line-height:1.6;color:rgba(255,255,255,.55)}
-.foot .slogan{font-family:var(--font-nx);margin-top:20px;font-size:19px;color:var(--jelly-teal)}
+.foot .slogan{font-family:var(--font-nx);margin-top:20px;font-size:19px;color:var(--clay)}
 .foot h3{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.38)}
 .foot ul{margin-top:20px;display:flex;flex-direction:column;gap:12px;font-size:15px;color:rgba(255,255,255,.72)}
-.foot ul a:hover{color:var(--jelly-teal)}
+.foot ul a:hover{color:var(--clay)}
 .foot-bot{margin-top:clamp(32px,4vw,48px);padding-top:22px;border-top:1px solid rgba(255,255,255,.14);
   display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.42)}
 
@@ -286,7 +279,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <a href="#palestrantes">Palestrantes</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="nav-cta"><a class="btn btn-blue js-cta" href="#ingresso">Quero Participar</a></div>
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Abrir menu">
       <span aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -299,7 +291,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <li><a href="#palestrantes">Palestrantes</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
-      <a class="btn btn-blue js-cta" href="#ingresso">Quero Participar</a>
     </div>
   </div>
 </header>
@@ -310,13 +301,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <section class="hero on-dark">
     <img class="hero-spark" src="assets/anthropic-spark.svg" alt="" aria-hidden="true" />
     <div class="wrap hero-in">
-      <div class="lbl" style="color:var(--jelly-blue)">Data Group · líder em licenciamento Claude no Brasil</div>
       <h1>Claude<span>Summit 26</span></h1>
-      <div class="hero-foot">
-        <p>Um dia para sair com o Claude trabalhando por você. <b>Não é um curso sobre inteligência artificial. É um dia de construção.</b></p>
-        <a class="btn btn-blue js-cta" href="#ingresso">Quero Participar
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
       </div>
     </div>
   </section>
