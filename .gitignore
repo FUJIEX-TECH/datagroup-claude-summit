@@ -1,0 +1,4 @@
+node_modules/
+video/out/
+_shot.html
+.DS_Store
