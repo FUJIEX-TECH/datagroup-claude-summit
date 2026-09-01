@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#024FFA" />
 
-    <title>1º Claude Day Summit Brasil | Data Group + Anthropic</title>
+    <title>Claude Day Summit Brasil | Data Group + Anthropic</title>
     <meta
       name="description"
       content="Aprenda a usar Claude e Claude Code com o Data Group, membro da Claude Partner Network. Um dia de imersão em IA agêntica em São Paulo. Vagas limitadas."
@@ -340,7 +340,7 @@
       .hero__badge { display: inline-flex; align-items: center; gap: .75rem; font-size: .8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-muted); }
       .hero h1 {
         margin-top: 1.5rem; font-weight: 600; letter-spacing: -.04em;
-        font-size: clamp(2.5rem, 1rem + 5.6vw, 5rem); line-height: .96;
+        font-size: clamp(2.5rem, 1rem + 6vw, 5.5rem); line-height: .96;
       }
       .hero h1 .mask { display: inline-block; overflow: hidden; padding-bottom: .1em; vertical-align: bottom; line-height: .92; }
       .hero h1 .mask > span { display: inline-block; transform: translateY(115%); transition: transform 1s var(--ease); }
@@ -709,7 +709,6 @@
             </div>
 
             <h1>
-              <span class="mask"><span>1º</span></span>
               <span class="mask"><span>Claude</span></span>
               <span class="mask"><span>Day</span></span>
               <span class="mask"><span>Summit</span></span>
@@ -1174,23 +1173,23 @@
 
           <div class="venue-grid">
             <div class="reveal">
-              <!-- PLACEHOLDER: fotos reais do Cubo Itaú (fachada, palco, lounge, sala, café) -->
+              <!-- PLACEHOLDER: faltam fotos do palco, lounge, sala e café.
+                   Para voltar ao carrossel: acrescente um .venue-main__slide e um
+                   <button> em .venue-thumbs por foto. Com mais de uma foto as
+                   miniaturas reaparecem sozinhas. -->
               <div class="venue-gallery">
                 <div class="venue-main">
                   <div class="venue-main__track" id="venue-track">
-                    <div class="venue-main__slide"><div class="venue-ph"><span>Fachada</span></div></div>
-                    <div class="venue-main__slide"><div class="venue-ph"><span>Palco principal</span></div></div>
-                    <div class="venue-main__slide"><div class="venue-ph"><span>Lounge</span></div></div>
-                    <div class="venue-main__slide"><div class="venue-ph"><span>Sala de reunião</span></div></div>
-                    <div class="venue-main__slide"><div class="venue-ph"><span>Café</span></div></div>
+                    <div class="venue-main__slide">
+                      <img src="assets/images/cubo-itau-fachada.jpg"
+                           alt="Entrada do Cubo Itaú, na Vila Olímpia" loading="lazy" draggable="false" />
+                    </div>
                   </div>
                 </div>
                 <div class="venue-thumbs" id="venue-thumbs">
-                  <button type="button" aria-label="Ir para foto 1" aria-current="true"><div class="venue-ph"></div></button>
-                  <button type="button" aria-label="Ir para foto 2" aria-current="false"><div class="venue-ph"></div></button>
-                  <button type="button" aria-label="Ir para foto 3" aria-current="false"><div class="venue-ph"></div></button>
-                  <button type="button" aria-label="Ir para foto 4" aria-current="false"><div class="venue-ph"></div></button>
-                  <button type="button" aria-label="Ir para foto 5" aria-current="false"><div class="venue-ph"></div></button>
+                  <button type="button" aria-label="Ir para foto 1" aria-current="true">
+                    <img src="assets/images/cubo-itau-fachada.jpg" alt="" aria-hidden="true" loading="lazy" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -1545,37 +1544,37 @@
          Amarrando o tempo ao scroll, a peca inteira cabe na travessia, no ritmo
          de quem esta rolando. O mp4 foi reencodado com keyframe a cada 6 quadros
          para o seek ser suave. */
-      var vPrimed = false, vArmado = false, vRetryLigado = false;
+      var vArmado = false, vEsperandoGesto = false;
 
-      function tocarVideo() {
-        vEl.muted = true;   /* o Safari checa a propriedade, nao o atributo */
-        var pr = vEl.play();
-        if (!pr || !pr.catch) { return; }
-        pr.catch(function () {
-          /* algum navegador barrou o autoplay mesmo com o video mudo. Em vez de
-             deixar o visitante ter que clicar no video, tenta de novo no primeiro
-             toque em qualquer lugar da pagina. */
-          if (vRetryLigado) { return; }
-          vRetryLigado = true;
-          var eventos = ['pointerdown', 'keydown', 'touchstart', 'wheel'];
-          var retry = function () {
-            vEl.play().catch(function () {});
-            eventos.forEach(function (ev) { document.removeEventListener(ev, retry); });
-          };
-          eventos.forEach(function (ev) {
-            document.addEventListener(ev, retry, { passive: true });
-          });
-        });
+      /* Eventos que valem como ativacao do usuario.
+         'wheel' NAO vale: rolar a pagina nao libera autoplay em navegador nenhum.
+         Ter wheel nesta lista era o bug do Safari — o proprio scroll do visitante
+         disparava a nova tentativa, ela era recusada de novo, e o handler se
+         desregistrava. Dali em diante so um clique no video fazia tocar. */
+      var GESTOS = ['pointerup', 'click', 'keydown', 'touchend'];
+
+      function esperarGesto() {
+        if (vEsperandoGesto || !vEl) { return; }
+        vEsperandoGesto = true;
+        var soltar = function () {
+          vEsperandoGesto = false;
+          GESTOS.forEach(function (ev) { document.removeEventListener(ev, tentar, true); });
+        };
+        var tentar = function () {
+          var pr = vEl.play();
+          /* so larga os ouvintes quando o play de fato aconteceu; antes disso
+             cada gesto novo e uma chance a mais */
+          if (pr && pr.then) { pr.then(soltar).catch(function () {}); } else { soltar(); }
+        };
+        GESTOS.forEach(function (ev) { document.addEventListener(ev, tentar, true); });
       }
 
-      function primeVideo() {
-        /* alguns navegadores so entregam quadros depois de um play(); um play
-           seguido de pause imediato destrava o decoder sem o video andar. */
-        if (vPrimed || !vEl) { return; }
-        vPrimed = true;
+      function tocarVideo() {
+        if (!vEl) { return; }
+        vEl.muted = true;          /* o Safari checa a propriedade */
+        vEl.defaultMuted = true;   /* e reflete o atributo no HTML */
         var pr = vEl.play();
-        if (pr && pr.then) { pr.then(function () { vEl.pause(); }).catch(function () {}); }
-        else { vEl.pause(); }
+        if (pr && pr.catch) { pr.catch(esperarGesto); }
       }
 
       function videoScroll() {
@@ -1584,9 +1583,6 @@
         var total = r.height - window.innerHeight;
         var p = clamp(-r.top / (total || 1), 0, 1);
 
-        /* prepara o decoder enquanto a secao ainda esta longe: se rodar junto com
-           o play de verdade, o pause do prime chega depois e mata a reproducao */
-        if (r.top > window.innerHeight * 0.9 && r.top < window.innerHeight * 2) { primeVideo(); }
 
         /* 0 -> .35 abre o recorte; o resto da travessia fica com ele aberto */
         var open = clamp(p / 0.35, 0, 1);
@@ -1603,7 +1599,9 @@
         if (naTela && e > 0.75) {
           if (!vArmado) {
             vArmado = true;
-            try { vEl.currentTime = 0; } catch (err) {}
+            /* so busca o inicio se nao estiver la: um seek pendente faz o Safari
+               recusar o play() que vem logo atras */
+            if (vEl.currentTime > 0.05) { try { vEl.currentTime = 0; } catch (err) {} }
             tocarVideo();
           } else if (vEl.paused) {
             tocarVideo();
@@ -1755,6 +1753,8 @@
       var vThumbs = document.getElementById('venue-thumbs');
       if (vt && vThumbs) {
         var btns = Array.prototype.slice.call(vThumbs.querySelectorAll('button'));
+        /* com uma foto so a coluna de miniaturas nao tem funcao e rouba largura */
+        if (vt.children.length < 2) { vThumbs.style.display = 'none'; }
         btns.forEach(function (b, i) {
           b.addEventListener('click', function () {
             vt.style.transform = 'translateX(' + (-100 * i) + '%)';
