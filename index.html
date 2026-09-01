@@ -1738,8 +1738,9 @@
         if (!sparkCtx || sparkPts.length === 0) { return; }
         var w = sparkCanvas.clientWidth, h = sparkCanvas.clientHeight;
         sparkCtx.clearRect(0, 0, w, h);
-        /* o spark ocupa 0.78 da altura do hero e fica encostado na direita, em
-           vez de centralizado, porque a coluna de texto aqui e larga (52rem) */
+        /* referencia: no hero da Sauter o spark tem 640px de largura numa altura
+           de 825 — 0.78 da altura do hero. Aqui ele fica encostado na direita
+           em vez de centralizado, porque a nossa coluna de texto e mais larga. */
         var size = Math.min(h * 0.78, w * 0.44);
         var cx = w - size * 0.42, cy = h * 0.55;
         var rot = t * 0.00003;
