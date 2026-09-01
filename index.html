@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#024FFA" />
 
-    <title>1º Claude Summit Brasil | Data Group + Anthropic</title>
+    <title>1º Claude Day Summit Brasil | Data Group + Anthropic</title>
     <meta
       name="description"
       content="Aprenda a usar Claude e Claude Code com o Data Group, membro da Claude Partner Network. Um dia de imersão em IA agêntica em São Paulo. Vagas limitadas."
@@ -82,7 +82,7 @@
          RESET
       ========================================================== */
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
-      html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+      html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
       body {
         font-family: var(--font-display);
         background: var(--sand);
@@ -158,7 +158,7 @@
       .text-h3 { font-size: var(--text-h3); letter-spacing: -.02em; font-weight: 500; line-height: 1.1; text-wrap: balance; }
       .text-lead { font-size: var(--text-lead); letter-spacing: -.01em; line-height: 1.4; }
       .muted { color: var(--ink-muted); }
-      .accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
 
       .glass { background: #FBFCFF; border: 1px solid rgba(29,29,27,.08); box-shadow: 0 1px 2px rgba(29,29,27,.04), 0 14px 32px -22px rgba(29,29,27,.16); }
       .glass-hover { transition: box-shadow .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease); }
@@ -340,7 +340,7 @@
       .hero__badge { display: inline-flex; align-items: center; gap: .75rem; font-size: .8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-muted); }
       .hero h1 {
         margin-top: 1.5rem; font-weight: 600; letter-spacing: -.04em;
-        font-size: clamp(2.75rem, 1rem + 6.6vw, 5.75rem); line-height: .96;
+        font-size: clamp(2.5rem, 1rem + 5.6vw, 5rem); line-height: .96;
       }
       .hero h1 .mask { display: inline-block; overflow: hidden; padding-bottom: .1em; vertical-align: bottom; line-height: .92; }
       .hero h1 .mask > span { display: inline-block; transform: translateY(115%); transition: transform 1s var(--ease); }
@@ -348,6 +348,7 @@
       .hero h1 .mask:nth-of-type(2) > span { transition-delay: .07s; }
       .hero h1 .mask:nth-of-type(3) > span { transition-delay: .14s; }
       .hero h1 .mask:nth-of-type(4) > span { transition-delay: .21s; }
+      .hero h1 .mask:nth-of-type(5) > span { transition-delay: .28s; }
       .hero__sub { margin-top: 1.75rem; max-width: 36rem; }
       .hero__sub h2 { font-size: var(--text-h3); font-weight: 700; text-transform: uppercase; line-height: 1.375; letter-spacing: .01em; }
       .hero__sub p { margin-top: .75rem; max-width: 28rem; font-size: 1.0625rem; line-height: 1.625; color: var(--ink-muted); }
@@ -368,7 +369,7 @@
       .marquee:hover .marquee__track { animation-play-state: paused; }
       @keyframes marquee-x { to { transform: translateX(-50%); } }
       .marquee__item { display: flex; align-items: center; gap: clamp(1.5rem, 3vw, 3rem); padding-inline: clamp(.75rem, 1.5vw, 1.5rem); font-size: clamp(1rem, .75rem + 1vw, 1.75rem); font-weight: 600; letter-spacing: -.01em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-      .marquee__sep { font-size: .75em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .marquee__sep { font-size: .75em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
 
       /* ==========================================================
          VÍDEO — 300vh pinado, clip-path abrindo
@@ -383,11 +384,14 @@
         transition: filter .9s var(--ease), opacity .9s var(--ease), transform .9s var(--ease);
       }
       .video-title.is-in { filter: none; opacity: 1; transform: none; }
-      .video-pin { position: sticky; top: 0; left: 0; width: 100%; min-height: 100svh; overflow: hidden; }
+      .video-pin { position: sticky; top: 0; left: 0; width: 100%; min-height: 100vh; min-height: 100svh; overflow: hidden; }
       .video-frame {
         position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
         overflow: hidden; background: var(--abyss); pointer-events: none;
         clip-path: inset(32% 45% round 1000px);
+        will-change: clip-path;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
       }
       .video-frame video { position: relative; z-index: 10; width: 100%; height: 100%; object-fit: cover; transform: scale(.7); }
 
@@ -413,7 +417,6 @@
       }
       .agenda-row .time { flex-shrink: 0; width: 8.5rem; font-size: .8125rem; font-weight: 600; letter-spacing: .04em; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
       .agenda-row .what { flex: 1; font-size: 1.0625rem; font-weight: 500; }
-      @media (max-width: 640px) { .agenda-row { flex-wrap: wrap; gap: .375rem 1rem; } .agenda-row .time { width: auto; } }
       .agenda-item { border-radius: var(--radius-card); overflow: hidden; }
       .agenda-item__btn {
         display: flex; width: 100%; align-items: center; gap: 1rem; cursor: pointer; text-align: left;
@@ -425,7 +428,9 @@
       .agenda-item__btn:hover { border-color: rgba(2,79,250,.28); box-shadow: 0 18px 40px -30px rgba(29,29,27,.4); }
       .agenda-item__bar { height: 1.25rem; width: 4px; flex-shrink: 0; border-radius: 999px; }
       .agenda-item__pillar { font-size: .6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
-      .agenda-item__body { flex: 1; display: flex; align-items: center; gap: .875rem; }
+      .agenda-item__btn .time { flex-shrink: 0; width: 8.5rem; font-size: .8125rem; font-weight: 600; letter-spacing: .04em; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+      .agenda-item__btn .what { font-size: 1.0625rem; font-weight: 500; }
+      .agenda-item__body { flex: 1; min-width: 0; display: flex; align-items: center; gap: .875rem; }
       .agenda-item__plus { flex-shrink: 0; font-size: 1.375rem; line-height: 1; color: var(--ink-muted); transition: transform .35s var(--ease); }
       .agenda-item__btn[aria-expanded="true"] .agenda-item__plus { transform: rotate(45deg); }
       .agenda-item__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
@@ -439,7 +444,7 @@
       ========================================================== */
       .speakers-head { display: grid; gap: 2rem; }
       @media (min-width: 1024px) { .speakers-head { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; } .speakers-head h2 { grid-column: span 8; } .speakers-head .meta { grid-column: span 4; justify-self: end; } }
-      .speakers-rail { position: relative; left: 50%; width: 100vw; transform: translateX(-50%); overflow: hidden; }
+      .speakers-rail { position: relative; width: 100%; overflow: hidden; }
       .speakers-track {
         display: flex; gap: 1.25rem; overflow-x: auto; cursor: grab;
         padding-inline: var(--gutter); scrollbar-width: none; -ms-overflow-style: none; touch-action: pan-x;
@@ -586,6 +591,41 @@
       .footer__top span { transition: transform .3s; }
       .footer__top:hover span { transform: translateY(-2px); }
       .footer__glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+
+      /* ---------- Mobile: correcoes de alinhamento ---------- */
+      @media (max-width: 640px) {
+        /* horario sobe para cima do titulo, em vez de espremer a coluna da direita */
+        .agenda-row { flex-wrap: wrap; gap: .375rem 1rem; }
+        .agenda-row .time { width: auto; }
+        .agenda-item__btn { flex-wrap: wrap; gap: .5rem .75rem; padding: 1rem 1.125rem; }
+        .agenda-item__btn .time { width: 100%; }
+        .agenda-item__body { flex: 1 1 auto; min-width: 0; flex-wrap: wrap; gap: .5rem .75rem; }
+        .agenda-item__bar { height: 1rem; }
+        .agenda-item__panel p { padding-left: 1.125rem; }
+        .agenda-foot { gap: .875rem; }
+
+        /* filetes de canto: menores e recuados, para caberem entre a borda da
+           tela e o texto sem colidir com a bolinha da etiqueta de secao */
+        .corner-ticks { inset: 0 6px; }
+        .corner-ticks span { width: 10px; height: 10px; }
+
+        /* o mapa e o endereco tinham min-content maior que a coluna e empurravam
+           o grid para fora do padding da secao */
+        .venue-grid > * { min-width: 0; }
+        .venue-side, .venue-map, .venue-foot { min-width: 0; max-width: 100%; }
+        .venue-foot .tech-label { letter-spacing: .12em; overflow-wrap: anywhere; }
+        .venue-thumbs button { width: 3.5rem; }
+
+        /* alvos de toque: 44px e o minimo confortavel */
+        .footer nav a, .footer__top { display: inline-flex; align-items: center; min-height: 44px; }
+        .footer nav ul { gap: .125rem; }
+        .nav__brand > a { display: inline-flex; align-items: center; min-height: 44px; }
+
+        /* o contador em 4 colunas fica apertado; 2x2 respira */
+        .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .875rem; }
+        .countdown-wrap { gap: 2rem; }
+      }
+
     </style>
   </head>
 
@@ -668,6 +708,7 @@
             <h1>
               <span class="mask"><span>1º</span></span>
               <span class="mask"><span>Claude</span></span>
+              <span class="mask"><span>Day</span></span>
               <span class="mask"><span>Summit</span></span>
               <br />
               <span class="mask"><span class="accent">Brasil<span style="color:var(--teal)">.</span></span></span>
@@ -717,7 +758,7 @@
         <div class="video-scroll" id="video-scroll">
           <h2 class="video-title text-h2" id="video-title">
             <span>Veja como vai ser</span>
-            <span class="muted">o Claude Summit</span><span style="color:var(--teal)">.</span>
+            <span class="muted">o Claude Day Summit</span><span style="color:var(--teal)">.</span>
           </h2>
           <div class="video-pin">
             <div class="video-frame" id="video-frame">
@@ -814,12 +855,12 @@
 
             <div class="agenda-item reveal" data-d="1">
               <button type="button" class="agenda-item__btn" aria-expanded="false" aria-controls="pilar-1">
-                <span class="time" style="flex-shrink:0;width:8.5rem;font-size:.8125rem;font-weight:600;letter-spacing:.04em;color:var(--ink-muted)">09h30 — 11h30</span>
+                <span class="time">09h30 — 11h30</span>
                 <span class="agenda-item__body">
                   <span class="agenda-item__bar" style="background:var(--navy)" aria-hidden="true"></span>
                   <span class="agenda-item__pillar" style="color:var(--navy)">Pilar 1</span>
                   <!-- PLACEHOLDER: título real da palestra 01 -->
-                  <span class="what" style="font-size:1.0625rem;font-weight:500">Fundamentos e ecossistema Claude</span>
+                  <span class="what">Fundamentos e ecossistema Claude</span>
                 </span>
                 <span class="agenda-item__plus" aria-hidden="true">+</span>
               </button>
@@ -836,12 +877,12 @@
 
             <div class="agenda-item reveal" data-d="3">
               <button type="button" class="agenda-item__btn" aria-expanded="false" aria-controls="pilar-2">
-                <span class="time" style="flex-shrink:0;width:8.5rem;font-size:.8125rem;font-weight:600;letter-spacing:.04em;color:var(--ink-muted)">13h00 — 15h00</span>
+                <span class="time">13h00 — 15h00</span>
                 <span class="agenda-item__body">
                   <span class="agenda-item__bar" style="background:var(--purple)" aria-hidden="true"></span>
                   <span class="agenda-item__pillar" style="color:var(--purple)">Pilar 2</span>
                   <!-- PLACEHOLDER: título real da palestra 02 -->
-                  <span class="what" style="font-size:1.0625rem;font-weight:500">Produtividade e aplicações de negócio</span>
+                  <span class="what">Produtividade e aplicações de negócio</span>
                 </span>
                 <span class="agenda-item__plus" aria-hidden="true">+</span>
               </button>
@@ -858,12 +899,12 @@
 
             <div class="agenda-item reveal" data-d="5">
               <button type="button" class="agenda-item__btn" aria-expanded="false" aria-controls="pilar-3">
-                <span class="time" style="flex-shrink:0;width:8.5rem;font-size:.8125rem;font-weight:600;letter-spacing:.04em;color:var(--ink-muted)">15h30 — 17h30</span>
+                <span class="time">15h30 — 17h30</span>
                 <span class="agenda-item__body">
                   <span class="agenda-item__bar" style="background:var(--orange)" aria-hidden="true"></span>
                   <span class="agenda-item__pillar" style="color:var(--orange)">Pilar 3</span>
                   <!-- PLACEHOLDER: título real da palestra 03 -->
-                  <span class="what" style="font-size:1.0625rem;font-weight:500">Técnico: Claude Code, Skills e agentes</span>
+                  <span class="what">Técnico: Claude Code, Skills e agentes</span>
                 </span>
                 <span class="agenda-item__plus" aria-hidden="true">+</span>
               </button>
@@ -1027,7 +1068,7 @@
 
           <div class="faq-wrap">
             <div class="reveal" style="margin-bottom:1rem;display:flex;align-items:center;gap:1rem">
-              <span class="tech-label" style="white-space:nowrap">PERGUNTAS · CLAUDE SUMMIT · 2026</span>
+              <span class="tech-label" style="white-space:nowrap">PERGUNTAS · CLAUDE DAY SUMMIT · 2026</span>
               <span class="rule" aria-hidden="true" style="height:1px;width:2rem;background:var(--border)"></span>
             </div>
 
@@ -1053,7 +1094,7 @@
                 <div class="faq-item__panel"><div><p>Não é obrigatório. O plano gratuito cobre a maior parte dos exercícios. Para o bloco técnico, um plano pago rende mais — e o Data Group licencia Claude com condições de parceiro, então dá para resolver isso no próprio dia.</p></div></div>
               </div>
               <div class="faq-item reveal">
-                <button type="button" class="faq-item__btn" aria-expanded="false">Para quem é o Claude Summit Brasil?<span class="faq-item__plus" aria-hidden="true">+</span></button>
+                <button type="button" class="faq-item__btn" aria-expanded="false">Para quem é o Claude Day Summit Brasil?<span class="faq-item__plus" aria-hidden="true">+</span></button>
                 <div class="faq-item__panel"><div><p>Para quem decide ou executa dentro de uma operação: liderança, times de produto, dados, tecnologia, jurídico, atendimento e comercial. O corte não é por cargo, é por vontade de sair do dia com algo funcionando.</p></div></div>
               </div>
               <div class="faq-item reveal">
@@ -1087,7 +1128,7 @@
           <div class="eco-pin">
             <canvas class="eco-canvas" id="eco-canvas" aria-hidden="true"></canvas>
             <div class="eco-copy" id="eco-copy">
-              <span class="tech-label purple">Claude Summit · Data Group × Anthropic</span>
+              <span class="tech-label purple">Claude Day Summit · Data Group × Anthropic</span>
               <h2><span class="repel" data-repel>Um dia inteiro dentro do ecossistema Claude</span><span style="color:var(--teal)">.</span></h2>
               <p>O encontro do Data Group, membro da Claude Partner Network, para aprender IA agêntica na prática — direto de quem já implanta Claude em empresas brasileiras. Continue rolando.</p>
               <div class="eco-cta">
@@ -1124,7 +1165,7 @@
 
           <div style="position:relative;z-index:10;margin-bottom:var(--gap-title);max-width:42rem">
             <h2 class="text-h2 reveal">
-              <span>Onde vai acontecer</span> <span class="muted">o Claude Summit</span><span style="color:var(--teal)">.</span>
+              <span>Onde vai acontecer</span> <span class="muted">o Claude Day Summit</span><span style="color:var(--teal)">.</span>
             </h2>
           </div>
 
@@ -1194,7 +1235,7 @@
               O Data Group é membro da Claude Partner Network. Palestrantes e títulos das trilhas serão confirmados em breve.
             </p>
             <form class="footer__form" id="footer-form">
-              <label for="footer-email">Fique por dentro do Claude Summit</label>
+              <label for="footer-email">Fique por dentro do Claude Day Summit</label>
               <div class="row">
                 <input id="footer-email" type="email" required placeholder="Seu e-mail corporativo" />
                 <button type="submit" aria-label="Ir para a inscrição">
@@ -1236,7 +1277,7 @@
         </div>
 
         <div class="footer__bottom">
-          <p><span class="dot" aria-hidden="true" style="width:5px;height:5px"></span>© 2026 Data Group · Claude Summit Brasil</p>
+          <p><span class="dot" aria-hidden="true" style="width:5px;height:5px"></span>© 2026 Data Group · Claude Day Summit Brasil</p>
           <button type="button" class="footer__top" id="to-top" aria-label="Voltar ao topo">Topo <span aria-hidden="true">↑</span></button>
         </div>
       </div>
@@ -1382,7 +1423,7 @@
          ao chegar na copia do primeiro card volta a distancia exata do conjunto,
          e a emenda fica invisivel. Continua arrastavel com o mouse. */
       var rail = document.getElementById('speakers-track');
-      var railMeta = 0, railPausado = false;
+      var railMeta = 0, railPausado = false, railPos = 0;
 
       var railOriginais = 0;
       function medirRail() {
@@ -1423,10 +1464,12 @@
           rail.addEventListener(ev, function () {
             down = false; railPausado = false;
             rail.classList.remove('is-dragging');
-            /* devolve a posicao para dentro da primeira metade */
+            /* devolve a posicao para dentro do conjunto original */
             if (railMeta > 0) {
-              while (rail.scrollLeft >= railMeta) { rail.scrollLeft -= railMeta; }
-              while (rail.scrollLeft < 0) { rail.scrollLeft += railMeta; }
+              var pos = rail.scrollLeft % railMeta;
+              if (pos < 0) { pos += railMeta; }
+              rail.scrollLeft = pos;
+              railPos = pos;          /* o acumulador segue o que o dedo deixou */
             }
           });
         });
@@ -1441,8 +1484,13 @@
         if (!rail || railMeta <= 0 || railPausado || reduce) { railUltimo = t; return; }
         var dt = railUltimo ? Math.min(t - railUltimo, 64) : 16;
         railUltimo = t;
-        rail.scrollLeft += 27.5 * dt / 1000;      /* px por segundo */
-        if (rail.scrollLeft >= railMeta) { rail.scrollLeft -= railMeta; }
+        /* A posicao e acumulada aqui, num float, e so depois atribuida.
+           Somar direto no scrollLeft nao funciona no Safari: ele arredonda a
+           propriedade para inteiro, e como o passo e de ~0,46px por quadro a
+           fracao era descartada toda vez e o trilho nunca saia do lugar. */
+        railPos += 27.5 * dt / 1000;             /* px por segundo */
+        if (railPos >= railMeta) { railPos -= railMeta; }
+        rail.scrollLeft = railPos;
       }
 
       /* ---------- Contador ---------- */
@@ -1488,6 +1536,7 @@
       var vPrimed = false, vArmado = false, vRetryLigado = false;
 
       function tocarVideo() {
+        vEl.muted = true;   /* o Safari checa a propriedade, nao o atributo */
         var pr = vEl.play();
         if (!pr || !pr.catch) { return; }
         pr.catch(function () {
