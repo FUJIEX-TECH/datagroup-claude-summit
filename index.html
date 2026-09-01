@@ -390,7 +390,7 @@
         transition: filter .9s var(--ease), opacity .9s var(--ease), transform .9s var(--ease);
       }
       .video-title.is-in { filter: none; opacity: 1; transform: none; }
-      .video-pin { position: sticky; top: 0; left: 0; width: 100%; min-height: 100vh; min-height: 100svh; overflow: hidden; }
+      .video-pin { position: sticky; top: 0; left: 0; width: 100%; min-height: 100vh; min-height: 100svh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
       .video-frame {
         position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
         overflow: hidden; background: var(--abyss); pointer-events: none;
@@ -601,8 +601,12 @@
       /* ---------- Mobile: correcoes de alinhamento ---------- */
       @media (max-width: 640px) {
         /* horario sobe para cima do titulo, em vez de espremer a coluna da direita */
-        .agenda-row { flex-wrap: wrap; gap: .375rem 1rem; }
-        .agenda-row .time { width: auto; }
+        /* Um unico padrao para os dois tipos de card: horario em cima,
+           conteudo embaixo, mesma margem esquerda e mesmo padding. Antes a
+           linha simples punha o horario ao lado do titulo (titulo comecava em
+           x=157) e o acordeao empilhava (x=39): pareciam dois desenhos. */
+        .agenda-row { flex-direction: column; align-items: flex-start; gap: .5rem; padding: 1rem 1.125rem; }
+        .agenda-row .time, .agenda-row .what { width: 100%; }
         .agenda-item__btn { flex-wrap: wrap; gap: .5rem .75rem; padding: 1rem 1.125rem; }
         .agenda-item__btn .time { width: 100%; }
         /* base 0 em vez de auto: com auto o corpo nao encolhia e empurrava o
@@ -629,6 +633,13 @@
         .footer nav a, .footer__top { display: inline-flex; align-items: center; min-height: 44px; }
         .footer nav ul { gap: .125rem; }
         .nav__brand > a { display: inline-flex; align-items: center; min-height: 44px; }
+
+        /* O video e 16:9. Numa viewport retrato, encher a altura toda com
+           object-fit: cover cortava as laterais e comia o painel das cenas.
+           A moldura passa a ser uma caixa 4:3 centralizada: sobra um corte
+           lateral suave (75% da largura original, o painel vai ate 65%) e a
+           peca fica inteira e legivel. */
+        .video-frame { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 4 / 3; }
 
         /* o contador em 4 colunas fica apertado; 2x2 respira */
         .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .875rem; }
