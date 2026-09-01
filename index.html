@@ -599,7 +599,10 @@
         .agenda-row .time { width: auto; }
         .agenda-item__btn { flex-wrap: wrap; gap: .5rem .75rem; padding: 1rem 1.125rem; }
         .agenda-item__btn .time { width: 100%; }
-        .agenda-item__body { flex: 1 1 auto; min-width: 0; flex-wrap: wrap; gap: .5rem .75rem; }
+        /* base 0 em vez de auto: com auto o corpo nao encolhia e empurrava o
+           "+" para uma linha propria, encostado na esquerda */
+        .agenda-item__body { flex: 1 1 0; min-width: 0; flex-wrap: wrap; gap: .5rem .75rem; }
+        .agenda-item__plus { margin-left: auto; }
         .agenda-item__bar { height: 1rem; }
         .agenda-item__panel p { padding-left: 1.125rem; }
         .agenda-foot { gap: .875rem; }
@@ -1385,6 +1388,15 @@
             });
             el.appendChild(wrap);
           });
+
+          /* Puxa a pontuacao que vem logo depois para dentro da ultima palavra.
+             Sem isso o ponto final colorido e um elemento solto e, quando a
+             linha estoura no mobile, ele cai sozinho na linha de baixo. */
+          var seguinte = el.nextElementSibling;
+          var ultima = el.lastElementChild;
+          if (seguinte && ultima && /^[.,;:!?]{1,2}$/.test(seguinte.textContent.trim())) {
+            ultima.appendChild(seguinte);
+          }
         });
         var chars = Array.prototype.slice.call(document.querySelectorAll('.ch'));
         var RADIUS = 90, STRENGTH = 26;
