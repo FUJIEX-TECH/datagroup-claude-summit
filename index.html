@@ -11,7 +11,13 @@
       content="Aprenda a usar Claude e Claude Code com o Data Group, membro da Claude Partner Network. Um dia de imersão em IA agêntica em São Paulo. Vagas limitadas."
     />
 
-    <link rel="icon" type="image/png" href="assets/images/datagroup-mark.png" />
+    <!-- SVG para quem suporta (nitido em qualquer tamanho), PNG de 32 como
+         fallback, e a versao sem cantos arredondados para o iOS, que aplica a
+         mascara dele por cima. O mark original nao servia: 512x365, fora do
+         quadrado, e as linhas finas sumiam em 16px. -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="preload" href="assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
     <style>
@@ -711,8 +717,8 @@
             <h1>
               <span class="mask"><span>Claude</span></span>
               <span class="mask"><span>Day</span></span>
-              <span class="mask"><span>Summit</span></span>
               <br />
+              <span class="mask"><span>Summit</span></span>
               <span class="mask"><span class="accent">Brasil<span style="color:var(--teal)">.</span></span></span>
             </h1>
 
@@ -764,7 +770,7 @@
           </h2>
           <div class="video-pin">
             <div class="video-frame" id="video-frame">
-              <video id="hero-video" loop muted playsinline preload="auto" poster="assets/images/video-poster.jpg" src="assets/claude-summit-teaser.mp4"></video>
+              <video id="hero-video" autoplay loop muted playsinline preload="auto" poster="assets/images/video-poster.jpg" src="assets/claude-summit-teaser.mp4"></video>
             </div>
           </div>
         </div>
@@ -1544,7 +1550,13 @@
          Amarrando o tempo ao scroll, a peca inteira cabe na travessia, no ritmo
          de quem esta rolando. O mp4 foi reencodado com keyframe a cada 6 quadros
          para o seek ser suave. */
-      var vArmado = false, vEsperandoGesto = false;
+      var vArmado = false, vEsperandoGesto = false, vParado = false;
+      /* Marca o instante em que a pagina carregou. O video nasce com autoplay e
+         precisa tocar de verdade por um momento antes de o codigo assumir: e
+         essa primeira reproducao que faz o WebKit conceder a permissao ao
+         elemento. Sem ela, todo play() posterior exigia gesto do usuario, que
+         era o motivo de o video so rodar depois de um clique no Safari. */
+      var vInicio = Date.now();
 
       /* Eventos que valem como ativacao do usuario.
          'wheel' NAO vale: rolar a pagina nao libera autoplay em navegador nenhum.
@@ -1596,21 +1608,30 @@
            uma pilula pequena e escura: o visitante perdia a abertura e tinha a
            impressao de que o video nem tinha comecado. */
         var naTela = r.bottom > 0 && r.top < window.innerHeight;
-        if (naTela && e > 0.75) {
-          if (!vArmado) {
-            vArmado = true;
-            /* so busca o inicio se nao estiver la: um seek pendente faz o Safari
-               recusar o play() que vem logo atras */
-            if (vEl.currentTime > 0.05) { try { vEl.currentTime = 0; } catch (err) {} }
-            tocarVideo();
-          } else if (vEl.paused) {
-            tocarVideo();
+        if (naTela) {
+          vParado = false;
+          if (e > 0.75) {
+            if (!vArmado) {
+              vArmado = true;
+              /* so busca o inicio se nao estiver la: um seek pendente faz o
+                 Safari recusar o play() que vem logo atras */
+              if (vEl.currentTime > 0.05) { try { vEl.currentTime = 0; } catch (err) {} }
+              tocarVideo();
+            } else if (vEl.paused) {
+              tocarVideo();
+            }
           }
-        } else if (!naTela) {
+        } else if (!vParado && Date.now() - vInicio > 900) {
+          /* Estaciona o video UMA vez ao sair de vista, nao a cada quadro.
+             Rodando todo quadro, o `currentTime = 0` puxava o autoplay inicial
+             de volta ao zero antes de ele andar, num laco de seek: o video
+             tocava 0,02s, o WebKit nunca considerava que ele reproduziu, e por
+             isso todo play() posterior exigia gesto do usuario. Tambem gastava
+             CPU a toa com a secao fora da tela. */
+          vParado = true;
           vArmado = false;
           if (!vEl.paused) { vEl.pause(); }
-          /* saiu de vista: volta ao inicio para a proxima passagem */
-          try { if (vEl.currentTime !== 0) { vEl.currentTime = 0; } } catch (err) {}
+          try { vEl.currentTime = 0; } catch (err) {}
         }
       }
       if (vTitle) {
