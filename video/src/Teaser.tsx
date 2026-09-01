@@ -47,7 +47,7 @@ const Abertura: React.FC = () => {
         <div style={{display: 'flex', alignItems: 'center', gap: 16, justifyContent: 'center'}}>
           <Dot size={12} />
           <TechLabel color={C.mutedOnDark} size={26}>
-            Claude Day Summit · Brasil · 2026
+            Claude Day Summit · São Paulo · 2026
           </TechLabel>
         </div>
       </Rise>
@@ -247,7 +247,6 @@ const Fecho: React.FC = () => {
           >
             Claude Day
             <br />
-            Summit{' '}
             <span
               style={{
                 background: GRAD,
@@ -256,7 +255,7 @@ const Fecho: React.FC = () => {
                 color: 'transparent',
               }}
             >
-              Brasil
+              Summit
             </span>
             <span style={{color: C.teal}}>.</span>
           </h1>
